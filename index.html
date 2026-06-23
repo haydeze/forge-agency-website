@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge Agency — AI Automation for NZ & AUS Businesses</title>
+  <meta name="description" content="Forge Agency builds AI agents and automations for New Zealand and Australian businesses. Lead qualification, customer support, sales outreach, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f9f9f9;
+      --light-grey: #f3f3f3;
+      --mid-grey: #e4e4e4;
+      --border: #dedede;
+      --text-muted: #8a8a8a;
+      --text-secondary: #555555;
+      --text-primary: #1a1a1a;
+      --accent: #1a1a1a;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+      --radius: 10px;
+      --max-width: 1100px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+
+    nav.scrolled {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 450;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-cta {
+      background: var(--text-primary);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 7px;
+      font-weight: 500 !important;
+      transition: opacity 0.15s !important;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.82;
+      color: var(--white) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px 28px;
+      z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 450;
+    }
+
+    .mobile-menu .mobile-cta {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--text-primary);
+      color: var(--white) !important;
+      padding: 12px 24px;
+      border-radius: 7px;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ── SHARED ── */
+    section {
+      padding: 96px 24px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.12s;
+      border: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.82;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: #aaa;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 160px;
+      padding-bottom: 120px;
+      background: var(--white);
+    }
+
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--light-grey);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: #3d9e6e;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-divider {
+      margin-top: 88px;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-header {
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--light-grey);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how-it-works {
+      background: var(--white);
+    }
+
+    .how-header {
+      margin-bottom: 64px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 26px;
+      left: calc(16.666% + 20px);
+      right: calc(16.666% + 20px);
+      height: 1px;
+      background: var(--border);
+    }
+
+    .step {
+      padding: 0 28px 0 0;
+      position: relative;
+    }
+
+    .step:last-child {
+      padding-right: 0;
+    }
+
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 280px;
+    }
+
+    /* ── WHY FORGE ── */
+    #why-forge {
+      background: var(--text-primary);
+      padding: 88px 24px;
+    }
+
+    #why-forge .section-tag {
+      color: rgba(255,255,255,0.45);
+    }
+
+    #why-forge .section-heading {
+      color: var(--white);
+    }
+
+    .why-header {
+      margin-bottom: 56px;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .trust-card {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      background: rgba(255,255,255,0.04);
+      transition: background 0.2s;
+    }
+
+    .trust-card:hover {
+      background: rgba(255,255,255,0.07);
+    }
+
+    .trust-icon {
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .trust-card h3 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .trust-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left .section-sub {
+      margin-bottom: 32px;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 11px 16px;
+      border-radius: 8px;
+    }
+
+    .contact-email strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 550;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #999;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #bbb;
+    }
+
+    .form-group textarea {
+      height: 120px;
+    }
+
+    .form-submit {
+      margin-top: 4px;
+    }
+
+    .form-success {
+      display: none;
+      padding: 14px 18px;
+      background: #f0faf5;
+      border: 1px solid #a8dfc0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #2e7d52;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      section {
+        padding: 72px 20px;
+      }
+
+      #hero {
+        padding-top: 120px;
+        padding-bottom: 80px;
+      }
+
+      .hero-heading {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+      }
+
+      .hero-sub {
+        font-size: 1rem;
+      }
+
+      .steps-grid::before {
+        display: none;
+      }
+
+      .steps-grid {
+        gap: 40px;
+      }
+
+      .step {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 0;
+      }
+
+      .step-num {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        text-align: center;
+      }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">Forge<span>Agency</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#why-forge">Why Forge</a></li>
+        <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#services" class="mobile-link">Services</a></li>
+      <li><a href="#how-it-works" class="mobile-link">How It Works</a></li>
+      <li><a href="#why-forge" class="mobile-link">Why Forge</a></li>
+      <li><a href="#contact" class="mobile-cta mobile-link">Book a Free Call</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge fade-in">
+        <span class="hero-badge-dot"></span>
+        Now working with NZ &amp; AUS businesses
+      </div>
+      <h1 class="hero-heading fade-in">We Build AI That Works While You Sleep</h1>
+      <p class="hero-sub fade-in">
+        Forge Agency designs and deploys intelligent AI agents and automations tailored for New Zealand and Australian businesses — so your team can focus on what matters.
+      </p>
+      <div class="hero-actions fade-in">
+        <a href="#contact" class="btn btn-primary">Book a Free Call</a>
+        <a href="#services" class="btn btn-outline">See What We Build</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <span class="section-tag fade-in">Services</span>
+        <h2 class="section-heading fade-in">AI built for real business problems</h2>
+        <p class="section-sub fade-in">Every agent we build is purpose-built for your workflow — not a generic chatbot.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon">🎯</div>
+          <h3>Lead Qualification Agent</h3>
+          <p>Automatically score and qualify inbound leads 24/7. Prioritise your pipeline without lifting a finger — your sales team only speaks to people ready to buy.</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">💬</div>
+          <h3>Customer Support Agent</h3>
+          <p>Handle FAQs, bookings, and support tickets instantly. Reduce response times from hours to seconds and keep customers happy around the clock.</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">📤</div>
+          <h3>Sales Outreach Agent</h3>
+          <p>Personalised outreach at scale. Your AI agent researches prospects, drafts messages, and follows up — all without manual effort from your team.</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">⭐</div>
+          <h3>Review Automation</h3>
+          <p>Automatically request, monitor, and respond to customer reviews across Google and other platforms. Build your reputation on autopilot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="how-header">
+        <span class="section-tag fade-in">Process</span>
+        <h2 class="section-heading fade-in">How It Works</h2>
+        <p class="section-sub fade-in">From first conversation to live automation — we keep it simple and fast.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step fade-in">
+          <div class="step-num">01</div>
+          <div>
+            <h3>Discovery Call</h3>
+            <p>We spend 30 minutes understanding your business, your bottlenecks, and where AI can make the biggest impact — no jargon, no pressure.</p>
+          </div>
+        </div>
+        <div class="step fade-in">
+          <div class="step-num">02</div>
+          <div>
+            <h3>We Build It</h3>
+            <p>Our team designs, builds, and tests your custom AI agent. We handle the tech so you don't have to — with clear timelines and zero surprises.</p>
+          </div>
+        </div>
+        <div class="step fade-in">
+          <div class="step-num">03</div>
+          <div>
+            <h3>You Scale</h3>
+            <p>Your agent goes live, your team gets trained, and we stick around on retainer to optimise, expand, and keep everything running smoothly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY FORGE -->
+  <section id="why-forge">
+    <div class="container">
+      <div class="why-header">
+        <span class="section-tag fade-in">Why Us</span>
+        <h2 class="section-heading fade-in">Built different, by design</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card fade-in">
+          <div class="trust-icon">🇳🇿</div>
+          <h3>NZ Based</h3>
+          <p>We're a New Zealand team working in your timezone, understanding your market, and available when you need us — no offshore delays or communication gaps.</p>
+        </div>
+        <div class="trust-card fade-in">
+          <div class="trust-icon">⚡</div>
+          <h3>Fast Delivery</h3>
+          <p>Most agents are live within 2–3 weeks. We move fast without cutting corners — from scoping to deployment, we keep you in the loop every step of the way.</p>
+        </div>
+        <div class="trust-card fade-in">
+          <div class="trust-icon">🔧</div>
+          <h3>Retainer Support</h3>
+          <p>We don't hand you an agent and disappear. Our retainer plans keep us on-call to maintain, improve, and expand your automations as your business grows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-left">
+          <span class="section-tag fade-in">Contact</span>
+          <h2 class="section-heading fade-in">Ready to automate?</h2>
+          <p class="section-sub fade-in">Book a free 30-minute discovery call and we'll show you exactly where AI can save you time and money — no obligation.</p>
+          <div class="contact-email fade-in">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="3" width="14" height="10" rx="2" stroke="#8a8a8a" stroke-width="1.3"/>
+              <path d="M1 5.5L8 9.5L15 5.5" stroke="#8a8a8a" stroke-width="1.3"/>
+            </svg>
+            <strong>forgeagency.nz@gmail.com</strong>
+          </div>
+        </div>
+        <div class="contact-right fade-in">
+          <form class="form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="jane@company.co.nz" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="business">Business Name</label>
+              <input type="text" id="business" name="business" placeholder="Your business name" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking to automate..." required></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+            </div>
+            <div class="form-success" id="formSuccess">
+              ✓ &nbsp;Message received — we'll be in touch within one business day.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Forge Agency</div>
+      <div class="footer-copy">© 2025 Forge Agency · New Zealand</div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Nav scroll shadow ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ── Mobile menu ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+      });
+    });
+
+    // ── Scroll fade-in ──
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, 60 * i);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Contact form ──
+    const form = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if (!name || !email || !message) {
+        const first = [...form.querySelectorAll('[required]')].find(f => !f.value.trim());
+        if (first) {
+          first.focus();
+          first.style.borderColor = '#e07070';
+          first.addEventListener('input', () => { first.style.borderColor = ''; }, { once: true });
+        }
+        return;
+      }
+
+      const submitBtn = form.querySelector('[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        form.reset();
+        submitBtn.style.display = 'none';
+        formSuccess.style.display = 'block';
+      }, 900);
+    });
+  </script>
+</body>
+</html>
